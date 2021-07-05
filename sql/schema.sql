@@ -35,7 +35,6 @@ create table if not exists answer (
     updated_at      timestamp,
     writer_id       bigint,
     primary key     (id),
-    foreign key     (question_id) references question(id),
     foreign key     (writer_id) references user(id)
 );
 
