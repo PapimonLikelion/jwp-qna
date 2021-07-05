@@ -4,24 +4,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
 import qna.domain.User;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static qna.domain.UserTest.JAVAJIGI;
-import static qna.domain.UserTest.SANJIGI;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD;
 
 @DataJpaTest
+@DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
 class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
+    private final User JAVAJIGI = new User(1L, "javajigi", "password", "name", "javajigi@slipp.net");
+    private final User SANJIGI = new User(2L, "sanjigi", "password", "name", "sanjigi@slipp.net");
+
     @BeforeEach
     public void setUp() {
-        userRepository.save(SANJIGI);
         userRepository.save(JAVAJIGI);
+        userRepository.save(SANJIGI);
     }
 
     @Test
