@@ -18,10 +18,10 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
 class QuestionRepositoryTest {
     @Autowired
-    QuestionRepository questionRepository;
+    UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
+    QuestionRepository questionRepository;
 
     private final User JAVAJIGI = new User(1L, "javajigi", "password", "name", "javajigi@slipp.net");
     private final User SANJIGI = new User(2L, "sanjigi", "password", "name", "sanjigi@slipp.net");
@@ -56,7 +56,7 @@ class QuestionRepositoryTest {
     public void 질문_조회_후_작성자_조회() {
         questionRepository.save(Q1);
 
-        final Optional<Question> question = questionRepository.findById(Q1.getId());
+        final Optional<Question> question = questionRepository.findByIdAndDeletedFalse(Q1.getId());
         final User writer = question.get().getWriter();
 
         assertThat(writer).isEqualTo(Q1.getWriter());
