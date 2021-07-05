@@ -67,8 +67,16 @@ public class Answer {
         return writer;
     }
 
-    public Long getQuestionId() {
-        return question.getId();
+    public void setWriter(User writer) {
+        this.writer = writer;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public String getContents() {
